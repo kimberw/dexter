@@ -10,8 +10,10 @@ import {
   type Model,
 } from '../utils/model.js';
 import { getOllamaModels } from '../utils/ollama.js';
-import { DEFAULT_MODEL, DEFAULT_PROVIDER } from '../model/llm.js';
+import { DEFAULT_MODEL } from '../model/llm.js';
 import { InMemoryChatHistory } from '../utils/in-memory-chat-history.js';
+
+const DEFAULT_PROVIDER_FOR_DEXTER = 'anthropic';
 
 const SELECTION_STATES = [
   'provider_select',
@@ -46,7 +48,7 @@ export class ModelSelectionController {
   constructor(onError: (message: string) => void, onChange?: ChangeListener) {
     this.onError = onError;
     this.onChange = onChange;
-    this.providerValue = getSetting('provider', DEFAULT_PROVIDER);
+    this.providerValue = getSetting('provider', DEFAULT_PROVIDER_FOR_DEXTER);
     const savedModel = getSetting('modelId', null) as string | null;
     this.modelValue =
       savedModel ?? getDefaultModelForProvider(this.providerValue) ?? DEFAULT_MODEL;

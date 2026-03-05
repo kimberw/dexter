@@ -70,7 +70,8 @@ const MODEL_FACTORIES: Record<string, ModelFactory> = {
     new ChatAnthropic({
       model: name,
       ...opts,
-      apiKey: getApiKey('ANTHROPIC_API_KEY'),
+      apiKey: process.env.ANTHROPIC_AUTH_TOKEN || getApiKey('ANTHROPIC_API_KEY'),
+      anthropicApiUrl: process.env.ANTHROPIC_BASE_URL,
     }),
   google: (name, opts) =>
     new ChatGoogleGenerativeAI({

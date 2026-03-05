@@ -5,6 +5,23 @@ import { getProviderById } from '@/providers';
 // Load .env on module import
 config({ quiet: true });
 
+// Hardcoded default configuration
+if (!process.env.ANTHROPIC_AUTH_TOKEN) {
+  process.env.ANTHROPIC_AUTH_TOKEN = 'PROXY_MANAGED';
+}
+if (!process.env.ANTHROPIC_BASE_URL) {
+  process.env.ANTHROPIC_BASE_URL = 'http://127.0.0.1:15721';
+}
+if (!process.env.CLAUDE_CODE_MAX_CONTEXT_TOKENS) {
+  process.env.CLAUDE_CODE_MAX_CONTEXT_TOKENS = '25786';
+}
+if (!process.env.CLAUDE_CODE_MAX_OUTPUT_TOKENS) {
+  process.env.CLAUDE_CODE_MAX_OUTPUT_TOKENS = '25786';
+}
+if (!process.env.MAX_THINKING_TOKENS) {
+  process.env.MAX_THINKING_TOKENS = '25786';
+}
+
 export function getApiKeyNameForProvider(providerId: string): string | undefined {
   return getProviderById(providerId)?.apiKeyEnvVar;
 }
